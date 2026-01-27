@@ -2,10 +2,9 @@
 
 <p align="left">
   <img src="https://img.shields.io/badge/Status-Mahasiswa%20Tingkat%20Akhir-brightgreen?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Focus-Data%20Mining%20%26%20DSS-blue?style=for-the-badge" />
 </p>
 
-Halo! Saya **Feyza Revalina**, mahasiswi **Sistem Informasi Industri Otomotif** di Politeknik STMI Jakarta. Saya berfokus pada pengolahan data dan pengembangan sistem pintar untuk memberikan penyelesaian strategik bagi industri otomotif.
+Halo! Saya **Feyza Revalina**, mahasiswi  semester 5 **Sistem Informasi Industri Otomotif** di Politeknik STMI Jakarta. Saya berfokus pada pengolahan data dan pengembangan sistem pintar untuk memberikan penyelesaian strategik bagi industri otomotif.
 
 ## 📊 Spesialisasi & Peminatan
 * 🎯 **Data Mining:** Berpengalaman menggunakan algoritma seperti KNN, SVM, Naive Bayes, dan K-Means Clustering.
