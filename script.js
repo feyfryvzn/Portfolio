@@ -44,7 +44,7 @@ document.getElementById('scrollTop').addEventListener('click', function() {
 });
 
 // Typing Animation
-const words = ['Developer', 'Designer', 'Freelancer', 'Problem Solver'];
+const words = ['Data Analyst', 'DSS Developer', 'Industrial IT Specialist'];
 let wordIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
@@ -110,4 +110,5 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     });
+
 });
