@@ -26,12 +26,6 @@ Halo! Saya **Feyza Revalina**, mahasiswi  semester 5 **Sistem Informasi Industri
 * 🦺 **PPE Detection (YOLOv8):** Deteksi alat pelindung diri untuk keselamatan kerja industri.
 * 🚗 **Service Reservation System:** Digitalisasi reservasi servis mobil pada bengkel Cars City.
 
-## 📈 GitHub Stats
-<p align="left">
-<img height="180em" src="https://github-readme-stats.vercel.app/api?username=feyfryvzn&show_icons=true&theme=dracula&include_all_commits=true&count_private=true" />
-<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=feyfryvzn&layout=compact&langs_count=7&theme=dracula" />
-</p>
-
 ## 🤝 Mari Terhubung
 * 📧 **Email:** feyzarevalina@gmail.com
 * 📸 **Instagram:** [@fey_fryvzn](https://www.instagram.com/fey_fryvzn)
