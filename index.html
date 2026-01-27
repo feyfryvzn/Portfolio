@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="id" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feyza Revalina | Creative Developer Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-accent: #FF85B3;
+            --secondary-accent: #FFC2D1;
+            --accent-dark: #D43A78;
+            --bg-light: #FFF5F7;
+            --text-main: #4A1D33;
+            --text-muted: #8E6C7E;
+            --navbar-bg: rgba(255, 255, 255, 0.8);
+            --mesh-pink: #ffe5ec;
+            --mesh-purple: #f3e5f5;
+            --mesh-blue: #e3f2fd;
+            --mesh-white: #ffffff;
+        }
+
+        [data-bs-theme="dark"] {
+            --mesh-white: #2D0B1A;
+            --mesh-pink: #45162B;
+            --mesh-purple: #580a1f;
+            --mesh-blue: #2D0B1A;
+            --text-main: #FFE5EC;
+            --navbar-bg: rgba(45, 11, 26, 0.9);
+            --bg-light: #1a0a12;
+            --text-muted: #c89fb3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background-color: var(--mesh-white);
+            color: var(--text-main);
+            position: relative;
+        }
+
+        /* Animated Mesh Gradient Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 30%, var(--mesh-pink) 0%, transparent 45%),
+                radial-gradient(circle at 80% 20%, var(--mesh-purple) 0%, transparent 45%),
+                radial-gradient(circle at 50% 80%, var(--mesh-blue) 0%, transparent 50%),
+                radial-gradient(circle at 10% 90%, var(--secondary-accent) 0%, transparent 35%);
+            filter: blur(65px);
+            animation: moveMesh 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes moveMesh {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.1) translate(3%, 3%); }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-accent);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: floatParticle 15s linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Navbar */
+        .navbar {
+            background: var(--navbar-bg) !important;
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 133, 179, 0.15);
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--text-main) !important;
+        }
+
+        .nav-link {
+            color: var(--text-main) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-accent);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .btn-main {
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--primary-accent), var(--accent-dark));
+            color: white !important;
+            border: none;
+            box-shadow: 0 8px 20px rgba(255, 133, 179, 0.3);
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 133, 179, 0.5);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Floating Shapes */
+        .floating-shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary-accent), var(--accent-dark));
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            top: 10%;
+            left: -100px;
+        }
+
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--mesh-blue), var(--mesh-purple));
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            bottom: 10%;
+            right: -50px;
+            animation-delay: -4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary-accent), var(--accent-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Typing Animation */
+        .typing-text {
+            display: inline-block;
+            border-right: 3px solid var(--primary-accent);
+            animation: blink 0.7s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* Hero Image Container */
+        .hero-img-wrapper {
+            position: relative;
+            display: inline-block;
+            padding: 30px;
+        }
+
+        .dotted-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 3px dashed var(--primary-accent);
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 40%;
+            animation: morphBlob 8s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes morphBlob {
+            0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 40%; }
+            50% { border-radius: 60% 40% 30% 70% / 50% 60% 40% 60%; }
+            100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 40%; }
+        }
+
+        .profile-img {
+            position: relative;
+            z-index: 2;
+            border-radius: 30px;
+            max-width: 100%;
+            transition: 0.5s ease;
+            box-shadow: 0 20px 60px rgba(255, 133, 179, 0.3);
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        /* Info Cards */
+        .info-card {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(255, 133, 179, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 3;
+            animation: floatingCard 4s ease-in-out infinite;
+            border: 1px solid var(--secondary-accent);
+        }
+
+        [data-bs-theme="dark"] .info-card {
+            background: rgba(45, 11, 26, 0.95);
+        }
+
+        .card-top {
+            top: 8%;
+            right: -25px;
+        }
+
+        .card-bottom {
+            bottom: 8%;
+            left: -25px;
+            animation-delay: 2s;
+        }
+
+        @keyframes floatingCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .info-card i {
+            font-size: 1.5rem;
+            color: var(--primary-accent);
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 100px 0;
+            background: var(--bg-light);
+            position: relative;
+        }
+
+        .about-img-container {
+            position: relative;
+            padding-bottom: 40px;
+            padding-right: 40px;
+        }
+
+        .img-about {
+            width: 100%;
+            max-width: 450px;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255, 133, 179, 0.2);
+        }
+
+        .experience-badge {
+            position: absolute;
+            bottom: 20px;
+            right: 0;
+            width: 140px;
+            height: 140px;
+            background: white;
+            border: 2px dashed var(--primary-accent);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            animation: pulse 2.5s infinite;
+            box-shadow: 0 10px 30px rgba(255, 133, 179, 0.3);
+        }
+
+        [data-bs-theme="dark"] .experience-badge {
+            background: var(--mesh-white);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 133, 179, 0.4);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(255, 133, 179, 0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Skills Section */
+        .skills-section {
+            padding: 100px 0;
+        }
+
+        .skill-card {
+            padding: 40px 30px;
+            border: 1px solid rgba(255, 133, 179, 0.2);
+            border-radius: 20px;
+            background: white;
+            transition: all 0.4s ease;
+            height: 100%;
+            text-align: center;
+        }
+
+        [data-bs-theme="dark"] .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 133, 179, 0.3);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 133, 179, 0.2);
+            border-color: var(--primary-accent);
+        }
+
+        .skill-card i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-accent), var(--accent-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 100px 0;
+            background: var(--bg-light);
+        }
+
+        .project-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(255, 133, 179, 0.3);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(212, 58, 120, 0.95), transparent);
+            padding: 30px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            transform: translateY(0);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 0;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-bs-theme="dark"] .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .form-control {
+            border-radius: 15px;
+            padding: 15px 20px;
+            border: 1px solid rgba(255, 133, 179, 0.2);
+            background: var(--bg-light);
+            color: var(--text-main);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 0 0.25rem rgba(255, 133, 179, 0.25);
+            background: var(--bg-light);
+            color: var(--text-main);
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: var(--primary-accent);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 30px rgba(255, 133, 179, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 15px 40px rgba(255, 133, 179, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-light);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 133, 179, 0.2);
+        }
+
+        /* Scroll to Top */
+        .scroll-top {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-accent), var(--accent-dark));
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            z-index: 9998;
+            box-shadow: 0 10px 30px rgba(255, 133, 179, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-top.visible {
+            display: flex;
+            animation: bounceIn 0.5s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* Tab Navigation */
+        .nav-tabs .nav-link {
+            border: none;
+            background: rgba(255, 133, 179, 0.1);
+            color: var(--text-main);
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs .nav-link.active {
+            background: linear-gradient(135deg, var(--primary-accent), var(--accent-dark));
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .info-card {
+                position: static;
+                margin: 10px 0;
+            }
+
+            .experience-badge {
+                position: static;
+                margin: 20px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#home">FEYZA<span style="color:var(--primary-accent)">.</span></a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn-main btn-primary-custom" href="#contact">Hire Me</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+
+        <div class="container">
+            <div class="row align-items-center gy-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="badge rounded-pill bg-light text-primary px-3 py-2 mb-3 shadow-sm border">
+                        🚀 Available for New Projects
+                    </div>
+                    <h1 class="hero-title">
+                        Hi, I'm <span class="text-gradient">Feyza</span><br>
+                        Creative <span class="typing-text" id="typingText"></span>
+                    </h1>
+                    <p class="lead text-muted mb-4" style="max-width: 550px; line-height: 1.8;">
+                        Saya menggabungkan desain minimalis dengan teknologi terbaru untuk membangun website yang berkesan dan memorable.
+                    </p>
+
+                    <div class="d-flex flex-wrap gap-3 mb-4">
+                        <a href="#projects" class="btn-main btn-primary-custom">
+                            <i class="bi bi-briefcase me-2"></i>View Projects
+                        </a>
+                        <div class="social-links d-flex align-items-center">
+                            <a href="https://github.com/feyfryvzn" class="btn btn-outline-secondary rounded-circle me-2" target="_blank">
+                                <i class="bi bi-github"></i>
+                            </a>
+                            <a href="https://www.instagram.com/fey_fryvzn" class="btn btn-outline-secondary rounded-circle me-2" target="_blank">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                            <a href="#" class="btn btn-outline-secondary rounded-circle">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 text-center" data-aos="fade-left">
+                    <div class="hero-img-wrapper">
+                        <div class="dotted-border"></div>
+
+                        <div class="info-card card-top">
+                            <i class="bi bi-patch-check-fill"></i>
+                            <span>Best Design<br><strong>Awards</strong></span>
+                        </div>
+
+                        <div class="info-card card-bottom">
+                            <i class="bi bi-emoji-heart-eyes-fill"></i>
+                            <span>Happy Clients<br><strong>25k+</strong></span>
+                        </div>
+
+                        <img src="https://th.bing.com/th/id/OIP.rxCmmFgBNC1cm5bYqnBx2AHaMk?w=191&h=325&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Feyza" class="profile-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="row align-items-center gy-5">
+                <div class="col-lg-5" data-aos="fade-right">
+                    <div class="about-img-container">
+                        <div class="experience-badge">
+                            <h3 class="mb-0 fw-bold text-gradient">25k+</h3>
+                            <span class="small">Happy<br>Clients</span>
+                        </div>
+                        <img src="https://th.bing.com/th/id/OIP.rxCmmFgBNC1cm5bYqnBx2AHaMk?w=191&h=325&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="About Feyza" class="img-about">
+                    </div>
+                </div>
+
+                <div class="col-lg-7 px-lg-5" data-aos="fade-left">
+                    <h5 class="text-gradient fw-bold text-uppercase mb-3" style="letter-spacing: 2px;">::: I'M A DEVELOPER</h5>
+                    <h2 class="display-5 fw-bold mb-4">I Develop Ideas That Help People</h2>
+                    <p class="text-muted mb-5">Saya adalah pengembang kreatif yang berdedikasi untuk menciptakan solusi digital yang fungsional dan indah. Fokus saya adalah membantu brand berkembang di dunia digital dengan pendekatan yang inovatif dan user-centric.</p>
+
+                    <ul class="nav nav-tabs border-0 gap-3 mb-4" id="aboutTab" role="tablist">
+                        <li class="nav-item">
+                            <button class="nav-link active rounded-pill px-4 shadow-sm" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button">MY DETAILS</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link rounded-pill px-4 shadow-sm" id="experience-tab" data-bs-toggle="tab" data-bs-target="#experience" type="button">EXPERIENCE</button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content mt-4" id="aboutTabContent">
+                        <div class="tab-pane fade show active" id="details">
+                            <div class="row g-4">
+                                <div class="col-sm-6">
+                                    <label class="small text-muted d-block">My Name:</label>
+                                    <span class="fw-bold">Feyza Revalina</span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="small text-muted d-block">My Email:</label>
+                                    <span class="fw-bold">feyzarevalina@gmail.com</span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="small text-muted d-block">Language:</label>
+                                    <span class="fw-bold">Indonesian, English</span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="small text-muted d-block">My Address:</label>
+                                    <span class="fw-bold">Jakarta, Indonesia</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="experience">
+                            <div class="mb-4">
+                                <h6 class="fw-bold mb-1">Senior Web Designer - Tech Studio</h6>
+                                <p class="text-gradient small fw-bold mb-2">2022 - Present</p>
+                                <p class="text-muted small">Memimpin tim desain untuk menciptakan interface aplikasi yang user-friendly.</p>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Freelance Web Developer</h6>
+                                <p class="text-gradient small fw-bold mb-2">2020 - 2022</p>
+                                <p class="text-muted small">Mengerjakan berbagai project landing page untuk startup lokal.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold">My <span class="text-gradient">Specialized</span> Skills</h2>
+                <div class="mx-auto mt-3" style="width: 50px; height: 3px; background: var(--primary-accent);"></div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="skill-card">
+                        <i class="bi bi-code-slash"></i>
+                        <h5 class="mt-3 mb-0">HTML/CSS</h5>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="skill-card">
+                        <i class="bi bi-bootstrap"></i>
+                        <h5 class="mt-3 mb-0">Bootstrap</h5>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="skill-card">
+                        <i class="bi bi-palette"></i>
+                        <h5 class="mt-3 mb-0">UI Design</h5>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="skill-card">
+                        <i class="bi bi-laptop"></i>
+                        <h5 class="mt-3 mb-0">Responsive</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end mb-5" data-aos="fade-up">
+                <div>
+                    <h5 class="text-gradient fw-bold">PORTFOLIO</h5>
+                    <h2 class="fw-bold display-5">Featured Projects</h2>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="E-Commerce Project">
+                        <div class="project-overlay text-white">
+                            <h4 class="fw-bold mb-2">Inventori</h4>
+                            <p class="mb-3">Rancang Bangun Sistem Manajemen Inventoris Berbasis Web untuk Peningkatan Akurasi Stok Bahan dan Produk Jadi</p>
+                            <a href="   https://github.com/feyfryvzn/DC_Inventory" class="btn btn-light btn-sm rounded-pill px-4">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="Dashboard Project">
+                        <div class="project-overlay text-white">
+                            <h4 class="fw-bold mb-2">Sistem Penjualan dan Pembelian Furniture</h4>
+                            <p class="mb-3">Perancangan dan Implementasi Sistem Informasi Manajemen IKM Kurnia Jati Furniture</p>
+                            <a href="https://github.com/feyfryvzn/SI-Penjualan-dan-Pembelian-Furniture" class="btn btn-light btn-sm rounded-pill px-4">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&h=400&fit=crop" alt="Agency Project">
+                        <div class="project-overlay text-white">
+                            <h4 class="fw-bold mb-2"> Reservasi Service </h4>
+                            <p class="mb-3">Sistem Informasi Reservasi Service Mobil pada Bengkel Cars City</p>
+                            <a href="#" class="btn btn-light btn-sm rounded-pill px-4">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="Dashboard Project">
+                        <div class="project-overlay text-white">
+                            <h4 class="fw-bold mb-2">Sistem Penjualan dan Pembelian Sparepart</h4>
+                            <p class="mb-3">Perancangan sistem basis data untuk pengelolaan transaksi pembelian sparepart mobil di SAKURA KOREA PARTS.
+                                </p>
+                            <a href="https://github.com/feyfryvzn/SI-Penjualan-dan-Pembelian-Furniture" class="btn btn-light btn-sm rounded-pill px-4">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-5" data-aos="fade-right">
+                    <h5 class="text-gradient fw-bold text-uppercase mb-3">Get In Touch</h5>
+                    <h2 class="display-5 fw-bold mb-4">Let's Work Together!</h2>
+                    <p class="text-muted mb-5">
+                        Punya ide project yang menarik atau sekadar ingin menyapa? Silakan kirim pesan melalui form atau hubungi saya via media sosial.
+                    </p>
+
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="btn-primary-custom rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                            <i class="bi bi-envelope-fill"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="mb-0 fw-bold">Email Me</h6>
+                            <span class="text-muted">feyzarevalina@gmail.com</span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="btn-primary-custom rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="mb-0 fw-bold">Location</h6>
+                            <span class="text-muted">Jakarta, Indonesia</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7" data-aos="fade-left">
+                    <div class="contact-card">
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small">Full Name</label>
+                                    <input type="text" class="form-control" placeholder="Nama Anda">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small">Email Address</label>
+                                    <input type="email" class="form-control" placeholder="email@gmail.com">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-bold small">Subject</label>
+                                    <input type="text" class="form-control" placeholder="Tujuan Pesan">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-bold small">Message</label>
+                                    <textarea class="form-control" rows="4" placeholder="Tulis pesan Anda di sini..."></textarea>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn-main btn-primary-custom w-100 py-3">
+                                        Send Message <i class="bi bi-send ms-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <h3 class="fw-bold mb-4">FEYZA<span class="text-gradient">.</span></h3>
+            <div class="social-links mb-4">
+                <a href="https://www.instagram.com/fey_fryvzn" class="btn btn-outline-secondary btn-sm rounded-circle mx-1" target="_blank">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <a href="https://github.com/feyfryvzn" class="btn btn-outline-secondary btn-sm rounded-circle mx-1" target="_blank">
+                    <i class="bi bi-github"></i>
+                </a>
+                <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle mx-1">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+            </div>
+            <p class="text-muted small mb-0">&copy; 2026 Feyza Revalina. Made with ❤️ in Jakarta</p>
+        </div>
+    </footer>
+
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle Dark Mode">
+        <i class="bi bi-moon-stars-fill" id="toggleIcon"></i>
+    </button>
+
+    <!-- Scroll to Top -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="bi bi-arrow-up"></i>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+    
+
+</body>
+</html>
