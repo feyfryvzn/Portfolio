@@ -888,23 +888,23 @@
 
                 <div class="col-lg-7" data-aos="fade-left">
                     <div class="contact-card">
-                        <form>
+                        <form action="https://formspree.io/f/xpqdnvrb" method="POST">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small">Full Name</label>
-                                    <input type="text" class="form-control" placeholder="Nama Anda">
+                                    <input type="text" name="name" class="form-control" placeholder="Nama Anda" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small">Email Address</label>
-                                    <input type="email" class="form-control" placeholder="email@gmail.com">
+                                    <input type="email" name="email" class="form-control" placeholder="email@gmail.com" required>
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label fw-bold small">Subject</label>
-                                    <input type="text" class="form-control" placeholder="Tujuan Pesan">
+                                    <input type="text" name="subject" class="form-control" placeholder="Tujuan Pesan" required>
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label fw-bold small">Message</label>
-                                    <textarea class="form-control" rows="4" placeholder="Tulis pesan Anda di sini..."></textarea>
+                                    <textarea name="message" class="form-control" rows="4" placeholder="Tulis pesan Anda di sini..." required></textarea>
                                 </div>
                                 <div class="col-12 mt-4">
                                     <button type="submit" class="btn-main btn-primary-custom w-100 py-3">
@@ -951,6 +951,7 @@
     
 </body>
 </html>
+
 
 
 
