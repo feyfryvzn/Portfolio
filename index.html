@@ -594,6 +594,100 @@
                 margin: 20px auto;
             }
         }
+
+        /* Gallery Image Effects */
+        .gallery-img {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            object-fit: cover;
+            aspect-ratio: 16/10;
+            width: 100%;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.03);
+            border-color: var(--primary-accent);
+            box-shadow: 0 8px 25px rgba(255, 133, 179, 0.35) !important;
+        }
+
+        /* Fullscreen Lightbox */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 99999;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+            padding: 30px;
+            animation: fadeInLightbox 0.3s ease;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 100000;
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            transform: scale(1.2) rotate(90deg);
+        }
+
+        @keyframes fadeInLightbox {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Dark Mode Modal Adjustments */
+        [data-bs-theme="dark"] .modal-content {
+            background: rgba(45, 11, 26, 0.95) !important;
+        }
+
+        [data-bs-theme="dark"] .badge.bg-light {
+            background: rgba(255, 255, 255, 0.1) !important;
+            color: var(--text-main) !important;
+            border-color: rgba(255, 133, 179, 0.3) !important;
+        }
+
+        /* Project card image aspect ratio */
+        .project-card img {
+            aspect-ratio: 16/10;
+            object-fit: cover;
+        }
+
+        /* About & Projects Section dark mode */
+        [data-bs-theme="dark"] .about-section,
+        [data-bs-theme="dark"] .projects-section {
+            background: var(--mesh-white);
+        }
+
+        [data-bs-theme="dark"] .wave-container svg path {
+            fill: var(--mesh-white);
+        }
     </style>
 </head>
 <body>
@@ -669,7 +763,7 @@
                             <span>Database<br><strong>Analyst+</strong></span>
                         </div>
 
-                        <img src="fotofeyza.jpeg" alt="Feyza" class="profile-img"> 
+                        <img src="assets/profile/fotofeyza.jpeg" alt="Feyza" class="profile-img"> 
                     </div>
                 </div>
             </div>
@@ -691,7 +785,7 @@
                             <h3 class="mb-0 fw-bold text-gradient">HAI</h3>
                             <span class="small">This is<br>Me</span>
                         </div>
-                        <img src="1.jpeg" alt="About Feyza" class="img-about">
+                        <img src="assets/profile/about.jpeg" alt="About Feyza" class="img-about">
                     </div>
                 </div>
 
@@ -830,20 +924,22 @@
             </div>
 
             <div class="row g-4">
+                <!-- Madewi Cookies -->
                 <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="100">
                     <div class="project-card">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Inventory System">
+                        <img src="assets/madewi-cookies/dashboard.jpeg" alt="Madewi Cookies Inventory System">
                         <div class="project-overlay text-white">
                             <h4 class="fw-bold mb-2">Web-Based Inventory System</h4>
-                            <p class="mb-3">Optimasi akurasi stok bahan baku dan produk jadi menggunakan Framework Laravel.</p>
+                            <p class="mb-3">Optimasi akurasi stok bahan baku dan produk jadi menggunakan Framework Laravel — Madewi Cookies.</p>
                             <button type="button" class="btn btn-light btn-sm rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#modalInv">View Details</button>
                         </div>
                     </div>
                 </div>
 
+                <!-- Kurnia Jati Furniture -->
                 <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
                     <div class="project-card">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="IKM Management System">
+                        <img src="assets/furniture/dashboard-1.jpeg" alt="IKM Kurnia Jati Furniture">
                         <div class="project-overlay text-white">
                             <h4 class="fw-bold mb-2">IKM Management System</h4>
                             <p class="mb-3">Implementasi sistem informasi manajemen pada IKM Kurnia Jati Furniture.</p>
@@ -852,9 +948,10 @@
                     </div>
                 </div>
 
+                <!-- Cars City -->
                 <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
                     <div class="project-card">
-                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&h=400&fit=crop" alt="Car Service Reservation">
+                        <img src="assets/cars-city/dashboard-admin.jpeg" alt="Cars City Service Reservation">
                         <div class="project-overlay text-white">
                             <h4 class="fw-bold mb-2">Automotive Service Booking</h4>
                             <p class="mb-3">Sistem informasi reservasi layanan servis mobil pada Bengkel Cars City.</p>
@@ -863,22 +960,22 @@
                     </div>
                 </div>
 
-                <div class="row g-4">
-                    <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="project-card">
-                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Inventory System">
-                            <div class="project-overlay text-white">
-                                <h4 class="fw-bold mb-2">Vehicle Detection</h4>
-                                <p class="mb-3">Optimasi akurasi stok bahan baku dan produk jadi menggunakan Framework Laravel.</p>
-                                <button type="button" class="btn btn-light btn-sm rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#modalInv">View Details</button>
-                            </div>
+                <!-- PPE / Vehicle Detection -->
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="project-card">
+                        <img src="assets/detection/ppe-detection-1.jpeg" alt="PPE & Vehicle Detection">
+                        <div class="project-overlay text-white">
+                            <h4 class="fw-bold mb-2">Vehicle Detection</h4>
+                            <p class="mb-3">Sistem deteksi kendaraan berbasis Python menggunakan algoritma YOLO secara real-time.</p>
+                            <button type="button" class="btn btn-light btn-sm rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#modalDetection">View Details</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="400">
+                <!-- Sparepart -->
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="500">
                     <div class="project-card">
-                        <img src="https://images.unsplash.com/photo-1504222490345-c075b6008014?w=600&h=400&fit=crop" alt="Sparepart Management">
+                        <img src="assets/sparepart/sakura-korea-parts-1.jpeg" alt="Sparepart Transaction System">
                         <div class="project-overlay text-white">
                             <h4 class="fw-bold mb-2">Sparepart Transaction System</h4>
                             <p class="mb-3">Perancangan basis data relasional untuk pengelolaan transaksi sparepart mobil.</p>
@@ -891,150 +988,212 @@
     </section>
 
     <div class="modal fade" id="modalInv" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content p-4">
           <div class="modal-header border-0">
-            <h4 class="fw-bold text-gradient">Web Inventory System</h4>
+            <h4 class="fw-bold text-gradient">🍪 Madewi Cookies — Web Inventory System</h4>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
             <div class="row g-3 mb-4">
-              <div class="col-6 col-md-3">
-                <img src="1.jpeg" class="img-fluid rounded-4 shadow mb-2" alt="Inventory 1">
+              <div class="col-6 col-md-4">
+                <img src="assets/madewi-cookies/dashboard.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Dashboard Madewi Cookies">
+                <small class="d-block text-muted text-center mt-1">Dashboard</small>
               </div>
-              <div class="col-6 col-md-3">
-                <img src="2.jpeg" class="img-fluid rounded-4 shadow mb-2" alt="Inventory 2">
+              <div class="col-6 col-md-4">
+                <img src="assets/madewi-cookies/index-1.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Landing Page Madewi Cookies">
+                <small class="d-block text-muted text-center mt-1">Landing Page</small>
               </div>
-              <div class="col-6 col-md-3">
-                <img src="3.jpeg" class="img-fluid rounded-4 shadow mb-2" alt="Inventory 3">
+              <div class="col-6 col-md-4">
+                <img src="assets/madewi-cookies/index-2.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Landing Page 2">
+                <small class="d-block text-muted text-center mt-1">Product Showcase</small>
               </div>
-              <div class="col-6 col-md-3">
-                <img src="4.jpeg" class="img-fluid rounded-4 shadow mb-2" alt="Inventory 4">
+              <div class="col-6 col-md-4">
+                <img src="assets/madewi-cookies/halaman-produk.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Halaman Produk">
+                <small class="d-block text-muted text-center mt-1">Halaman Produk</small>
+              </div>
+              <div class="col-6 col-md-4">
+                <img src="assets/madewi-cookies/halaman-bahan-baku.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Bahan Baku">
+                <small class="d-block text-muted text-center mt-1">Data Bahan Baku</small>
+              </div>
+              <div class="col-6 col-md-4">
+                <img src="assets/madewi-cookies/halaman-resep.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Resep">
+                <small class="d-block text-muted text-center mt-1">Halaman Resep</small>
+              </div>
+              <div class="col-6 col-md-4">
+                <img src="assets/madewi-cookies/halaman-penjualan.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Penjualan">
+                <small class="d-block text-muted text-center mt-1">Data Penjualan</small>
+              </div>
+              <div class="col-6 col-md-4">
+                <img src="assets/madewi-cookies/halaman-laporan-penjualan.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Laporan Penjualan">
+                <small class="d-block text-muted text-center mt-1">Laporan Penjualan</small>
+              </div>
+              <div class="col-6 col-md-4">
+                <img src="assets/madewi-cookies/index-3.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Landing Page 3">
+                <small class="d-block text-muted text-center mt-1">Fitur Lengkap</small>
               </div>
             </div>
-            <p class="text-muted">Sistem manajemen stok industri berbasis web Laravel. Menjamin akurasi data bahan baku dan produk jadi secara real-time.</p>
+            <p class="text-muted">Sistem manajemen stok industri berbasis web Laravel untuk Madewi Cookies. Mengelola data bahan baku, resep produksi, produk jadi, transaksi penjualan, dan laporan penjualan secara real-time.</p>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">Laravel</span>
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">MySQL</span>
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">Bootstrap</span>
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">PHP</span>
+            </div>
             <div class="d-flex gap-2">
-              <a href="https://github.com/feyfryvzn/DC_Inventory" class="btn btn-dark rounded-pill px-4">GitHub</a>
+              <a href="https://github.com/feyfryvzn/DC_Inventory" class="btn btn-dark rounded-pill px-4" target="_blank"><i class="bi bi-github me-2"></i>GitHub</a>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="modal fade" id="modalIKM" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content p-4">
           <div class="modal-header border-0">
-            <h4 class="fw-bold text-gradient">IKM Furniture System</h4>
+            <h4 class="fw-bold text-gradient">🪑 IKM Kurnia Jati Furniture</h4>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
             <div class="row g-3 mb-4">
-              <div class="col-6 col-md-3">
-                <img src="assets/ikm-1.png" class="img-fluid rounded-4 shadow mb-2" alt="IKM 1">
+              <div class="col-6 col-md-4">
+                <img src="assets/furniture/dashboard-1.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Dashboard Furniture 1">
+                <small class="d-block text-muted text-center mt-1">Dashboard Overview</small>
               </div>
-              <div class="col-6 col-md-3">
-                <img src="assets/ikm-2.png" class="img-fluid rounded-4 shadow mb-2" alt="IKM 2">
+              <div class="col-6 col-md-4">
+                <img src="assets/furniture/dashboard-2.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Dashboard Furniture 2">
+                <small class="d-block text-muted text-center mt-1">Dashboard Stats</small>
               </div>
-              <div class="col-6 col-md-3">
-                <img src="assets/ikm-3.png" class="img-fluid rounded-4 shadow mb-2" alt="IKM 3">
+              <div class="col-6 col-md-4">
+                <img src="assets/furniture/index-1.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Index Furniture 1">
+                <small class="d-block text-muted text-center mt-1">Landing Page</small>
               </div>
-              <div class="col-6 col-md-3">
-                <img src="assets/ikm-4.png" class="img-fluid rounded-4 shadow mb-2" alt="IKM 4">
+              <div class="col-6 col-md-4">
+                <img src="assets/furniture/index-2.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Index Furniture 2">
+                <small class="d-block text-muted text-center mt-1">Product Catalog</small>
+              </div>
+              <div class="col-6 col-md-4">
+                <img src="assets/furniture/halaman-penjualan.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Penjualan Furniture">
+                <small class="d-block text-muted text-center mt-1">Data Penjualan</small>
+              </div>
+              <div class="col-6 col-md-4">
+                <img src="assets/furniture/halaman-dokumen-pkb.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Dokumen PKB">
+                <small class="d-block text-muted text-center mt-1">Dokumen PKB</small>
               </div>
             </div>
-            <p class="text-muted">Integrasi data produksi, penjualan, dan pembelian furnitur guna meningkatkan efisiensi operasional.</p>
+            <p class="text-muted">Sistem informasi manajemen terintegrasi untuk IKM Kurnia Jati Furniture. Mengelola data produksi, penjualan, pembelian, dan dokumen PKB guna meningkatkan efisiensi operasional.</p>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">Laravel</span>
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">MySQL</span>
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">Bootstrap</span>
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">PHP</span>
+            </div>
             <div class="d-flex gap-2">
-              <a href="https://github.com/feyfryvzn/SI-Penjualan-dan-Pembelian-Furniture" class="btn btn-dark rounded-pill px-4">GitHub</a>
+              <a href="https://github.com/feyfryvzn/SI-Penjualan-dan-Pembelian-Furniture" class="btn btn-dark rounded-pill px-4" target="_blank"><i class="bi bi-github me-2"></i>GitHub</a>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="modal fade" id="modalService" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content p-4">
           <div class="modal-header border-0">
-            <h4 class="fw-bold text-gradient">Automotive Booking</h4>
+            <h4 class="fw-bold text-gradient">🚗 Cars City — Automotive Service Booking</h4>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
             <div class="row g-3 mb-4">
-              <div class="col-6 col-md-3">
-                <img src="assets/service-1.png" class="img-fluid rounded-4 shadow mb-2" alt="Service 1">
+              <div class="col-6 col-md-6">
+                <img src="assets/cars-city/index.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Landing Page Reservasi">
+                <small class="d-block text-muted text-center mt-1">Landing Page</small>
               </div>
-              <div class="col-6 col-md-3">
-                <img src="assets/service-2.png" class="img-fluid rounded-4 shadow mb-2" alt="Service 2">
+              <div class="col-6 col-md-6">
+                <img src="assets/cars-city/dashboard-admin.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Dashboard Admin">
+                <small class="d-block text-muted text-center mt-1">Dashboard Admin</small>
               </div>
-              <div class="col-6 col-md-3">
-                <img src="assets/service-3.png" class="img-fluid rounded-4 shadow mb-2" alt="Service 3">
+              <div class="col-6 col-md-6">
+                <img src="assets/cars-city/halaman-reservasi.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Halaman Reservasi">
+                <small class="d-block text-muted text-center mt-1">Halaman Reservasi</small>
               </div>
-              <div class="col-6 col-md-3">
-                <img src="assets/service-4.png" class="img-fluid rounded-4 shadow mb-2" alt="Service 4">
+              <div class="col-6 col-md-6">
+                <img src="assets/cars-city/panel-admin.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Panel Admin">
+                <small class="d-block text-muted text-center mt-1">Panel Admin</small>
               </div>
             </div>
-            <p class="text-muted">Sistem reservasi servis untuk meminimalisir waktu tunggu dan digitalisasi jadwal bengkel.</p>
+            <p class="text-muted">Sistem informasi reservasi layanan servis mobil pada Bengkel Cars City. Digitalisasi jadwal bengkel dan meminimalisir waktu tunggu pelanggan dengan booking online.</p>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">Laravel</span>
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">MySQL</span>
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">Bootstrap</span>
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">PHP</span>
+            </div>
             <div class="d-flex gap-2">
-              <a href="#" class="btn btn-dark rounded-pill px-4">GitHub</a>
+              <a href="#" class="btn btn-dark rounded-pill px-4"><i class="bi bi-github me-2"></i>GitHub</a>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="modal fade" id="modalInv" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content p-4">
-            <div class="modal-header border-0">
-              <h4 class="fw-bold text-gradient">Vehicle Detection</h4>
-              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-              <div class="row g-3 mb-4">
-                <div class="col-6 col-md-3">    
-                  <img src="1.jpeg" class="img-fluid rounded-4 shadow mb-2" alt="vehicle-detection-1">
-                </div>
-                <div class="col-6 col-md-3">
-                  <img src="2.jpeg" class="img-fluid rounded-4 shadow mb-2" alt="vehicle-detection-2">
-                </div>
-                <div class="col-6 col-md-3">
-                  <img src="3.jpeg" class="img-fluid rounded-4 shadow mb-2" alt="vehicle-detection 3">
-                </div>
-                <div class="col-6 col-md-3">
-                  <img src="4.jpeg" class="img-fluid rounded-4 shadow mb-2" alt="vehicle-detection-4">
-                </div>
-              </div>
-              <p class="text-muted">Sistem deteksi kendaraan berbasis web Python. Menjamin akurasi deteksi kendaraan secara real-time.</p>
-              <div class="d-flex gap-2">
-                <a href="https://github.com/feyfryvzn/vehicle-detection" class="btn btn-dark rounded-pill px-4">GitHub</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    <div class="modal fade" id="modalSparepart" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal fade" id="modalDetection" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content p-4">
           <div class="modal-header border-0">
-            <h4 class="fw-bold text-gradient">Sparepart System</h4>
+            <h4 class="fw-bold text-gradient">🔍 Vehicle & PPE Detection</h4>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
             <div class="row g-3 mb-4">
-              <div class="col-6 col-md-3">
-                <img src="assets/sparepart-1.png" class="img-fluid rounded-4 shadow mb-2" alt="Sparepart 1">
+              <div class="col-6">
+                <img src="assets/detection/ppe-detection-1.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="PPE Detection 1">
+                <small class="d-block text-muted text-center mt-1">PPE Detection Output</small>
               </div>
-              <div class="col-6 col-md-3">
-                <img src="assets/sparepart-2.png" class="img-fluid rounded-4 shadow mb-2" alt="Sparepart 2">
-              </div>
-              <div class="col-6 col-md-3">
-                <img src="assets/sparepart-3.png" class="img-fluid rounded-4 shadow mb-2" alt="Sparepart 3">
-              </div>
-              <div class="col-6 col-md-3">
-                <img src="assets/sparepart-4.png" class="img-fluid rounded-4 shadow mb-2" alt="Sparepart 4">
+              <div class="col-6">
+                <img src="assets/detection/ppe-detection-2.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="PPE Detection 2">
+                <small class="d-block text-muted text-center mt-1">Detection Results</small>
               </div>
             </div>
-            <p class="text-muted">Manajemen basis data relasional untuk transaksi suku cadang yang terintegrasi.</p>
+            <p class="text-muted">Sistem deteksi kendaraan dan PPE (Personal Protective Equipment) berbasis Python menggunakan algoritma YOLO. Menjamin akurasi deteksi objek secara real-time untuk kebutuhan keamanan industri otomotif.</p>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">Python</span>
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">YOLOv8</span>
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">OpenCV</span>
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">Computer Vision</span>
+            </div>
             <div class="d-flex gap-2">
-              <a href="#" class="btn btn-dark rounded-pill px-4">GitHub</a>
+              <a href="https://github.com/feyfryvzn/vehicle-detection" class="btn btn-dark rounded-pill px-4" target="_blank"><i class="bi bi-github me-2"></i>GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="modalSparepart" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content p-4">
+          <div class="modal-header border-0">
+            <h4 class="fw-bold text-gradient">🔧 Sakura Korea Parts — Sparepart System</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-3 mb-4">
+              <div class="col-6">
+                <img src="assets/sparepart/sakura-korea-parts-1.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Sakura Korea Parts 1">
+                <small class="d-block text-muted text-center mt-1">Sistem Transaksi</small>
+              </div>
+              <div class="col-6">
+                <img src="assets/sparepart/sakura-korea-parts-2.jpeg" class="img-fluid rounded-4 shadow-sm gallery-img" alt="Sakura Korea Parts 2">
+                <small class="d-block text-muted text-center mt-1">Data Sparepart</small>
+              </div>
+            </div>
+            <p class="text-muted">Perancangan basis data relasional untuk pengelolaan transaksi sparepart mobil pada Sakura Korea Parts. Sistem terintegrasi untuk manajemen suku cadang yang efisien.</p>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">MySQL</span>
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">Database Design</span>
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">ERD</span>
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2">SQL</span>
+            </div>
+            <div class="d-flex gap-2">
+              <a href="#" class="btn btn-dark rounded-pill px-4"><i class="bi bi-github me-2"></i>GitHub</a>
             </div>
           </div>
         </div>
@@ -1146,6 +1305,41 @@
             else nav.classList.remove('scrolled');
             if (window.scrollY > 300) scrollBtn.classList.add('visible');
             else scrollBtn.classList.remove('visible');
+        });
+    </script>
+
+    <!-- Fullscreen Lightbox -->
+    <div class="lightbox-overlay" id="lightboxOverlay">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <img src="" alt="Lightbox Image" id="lightboxImg">
+    </div>
+
+    <script>
+        // Gallery Lightbox
+        const lightbox = document.getElementById('lightboxOverlay');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        document.querySelectorAll('.gallery-img').forEach(img => {
+            img.addEventListener('click', function() {
+                lightboxImg.src = this.src;
+                lightboxImg.alt = this.alt;
+                lightbox.classList.add('active');
+            });
+        });
+
+        lightbox.addEventListener('click', function(e) {
+            if (e.target !== lightboxImg) {
+                lightbox.classList.remove('active');
+            }
+        });
+
+        lightboxClose.addEventListener('click', function() {
+            lightbox.classList.remove('active');
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') lightbox.classList.remove('active');
         });
     </script>
 </body>
