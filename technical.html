@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Architecture — Feyza Revalina</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <script>tailwind.config={theme:{extend:{fontFamily:{poppins:['Poppins','sans-serif']},colors:{pink:{50:'#FFF5F7',100:'#FFE5EC',200:'#FFC2D1',300:'#FF85B3',400:'#D43A78'}}}}}</script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Poppins',sans-serif;background:#0a0a0f;color:#FFE5EC;min-height:100vh;overflow-x:hidden}
+        .mesh-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;background:radial-gradient(circle at 20% 30%,rgba(212,58,120,.15) 0%,transparent 45%),radial-gradient(circle at 80% 60%,rgba(255,133,179,.1) 0%,transparent 45%),radial-gradient(circle at 50% 90%,rgba(100,20,60,.2) 0%,transparent 50%)}
+        .glass{background:rgba(255,255,255,.03);backdrop-filter:blur(20px);border:1px solid rgba(255,133,179,.15);border-radius:20px}
+        .glass-strong{background:rgba(255,133,179,.06);backdrop-filter:blur(25px);border:1px solid rgba(255,133,179,.2);border-radius:16px}
+        .gradient-text{background:linear-gradient(135deg,#FF85B3,#D43A78);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .accordion-btn{cursor:pointer;transition:all .3s}
+        .accordion-btn:hover{background:rgba(255,133,179,.1)}
+        .accordion-body{max-height:0;overflow:hidden;transition:max-height .5s ease}
+        .accordion-body.open{max-height:5000px}
+        .accordion-icon{transition:transform .3s}
+        .accordion-btn.active .accordion-icon{transform:rotate(180deg)}
+        .tag{display:inline-block;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:500;background:rgba(255,133,179,.12);color:#FF85B3;border:1px solid rgba(255,133,179,.2)}
+        .img-slot{border:2px dashed rgba(255,133,179,.3);border-radius:12px;min-height:200px;display:flex;align-items:center;justify-content:center;color:rgba(255,133,179,.4);transition:all .3s}
+        .img-slot:hover{border-color:#FF85B3;color:#FF85B3}
+        .code-block{background:rgba(0,0,0,.4);border:1px solid rgba(255,133,179,.1);border-radius:10px;padding:16px;font-family:'Courier New',monospace;font-size:13px;overflow-x:auto;color:#c89fb3;line-height:1.6}
+        .nav-glass{background:rgba(10,10,15,.8);backdrop-filter:blur(15px);border-bottom:1px solid rgba(255,133,179,.1)}
+        .pulse-dot{width:8px;height:8px;border-radius:50%;background:#FF85B3;animation:pulse 2s infinite}
+        @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
+        .flow-step{position:relative;padding-left:32px}
+        .flow-step::before{content:'';position:absolute;left:10px;top:28px;bottom:-8px;width:2px;background:rgba(255,133,179,.2)}
+        .flow-step:last-child::before{display:none}
+        .flow-dot{position:absolute;left:4px;top:8px;width:14px;height:14px;border-radius:50%;background:rgba(255,133,179,.3);border:2px solid #FF85B3}
+    </style>
+</head>
+<body class="font-poppins">
+<div class="mesh-bg"></div>
+
+<!-- Navbar -->
+<nav class="nav-glass fixed top-0 w-full z-50 py-4">
+  <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+    <a href="index.html" class="text-xl font-bold">FEYZA<span class="gradient-text">.</span></a>
+    <div class="flex items-center gap-6">
+      <a href="index.html" class="text-sm text-pink-200/60 hover:text-pink-300 transition">← Portfolio</a>
+      <div class="pulse-dot"></div>
+      <span class="text-xs text-pink-200/40">Technical Docs</span>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="pt-32 pb-16 px-6">
+  <div class="max-w-6xl mx-auto text-center">
+    <div class="inline-block px-4 py-1.5 rounded-full bg-pink-300/10 border border-pink-300/20 text-pink-300 text-xs font-medium mb-6">
+      <i class="bi bi-cpu me-1"></i> System Architecture Documentation
+    </div>
+    <h1 class="text-4xl md:text-5xl font-800 mb-4">Technical Architecture<br><span class="gradient-text">& Logic Design</span></h1>
+    <p class="text-pink-200/50 max-w-2xl mx-auto text-sm leading-relaxed">Dokumentasi mendalam tentang arsitektur sistem, algoritma, dan logika bisnis dari lima proyek utama — mendemonstrasikan kemampuan <em>Logical Thinking</em> dalam merancang solusi terintegrasi.</p>
+  </div>
+</header>
+
+<!-- Content -->
+<main class="max-w-5xl mx-auto px-6 pb-20 space-y-5">
+
+<!-- 1. Madewi Cookies -->
+<div class="glass overflow-hidden" data-aos="fade-up">
+  <button class="accordion-btn active w-full flex items-center justify-between p-6 text-left" onclick="toggleAcc(this)">
+    <div class="flex items-center gap-4">
+      <div class="w-12 h-12 rounded-2xl bg-pink-300/10 flex items-center justify-center text-2xl">🍪</div>
+      <div>
+        <h2 class="text-lg font-bold">Modul Inventaris — Madewi Cookies</h2>
+        <p class="text-xs text-pink-200/40 mt-1">Automated Recipe-Based Stock Reduction · WhatsApp Alert · Maps API</p>
+      </div>
+    </div>
+    <i class="bi bi-chevron-down accordion-icon text-pink-300"></i>
+  </button>
+  <div class="accordion-body open">
+    <div class="px-6 pb-6 space-y-5">
+      <div class="flex flex-wrap gap-2">
+        <span class="tag">Laravel 10</span><span class="tag">MySQL</span><span class="tag">WhatsApp API</span><span class="tag">Google Maps API</span><span class="tag">Queue Jobs</span>
+      </div>
+
+      <div class="glass-strong p-5 space-y-3">
+        <h3 class="font-bold text-pink-300 text-sm"><i class="bi bi-diagram-3 me-2"></i>Recipe-Based Auto Stock Deduction</h3>
+        <p class="text-sm text-pink-200/60 leading-relaxed">Sistem menerapkan prinsip <strong class="text-pink-200">Bill of Materials (BOM)</strong> yang diadaptasi ke industri kuliner. Setiap produk cookies terhubung ke tabel <code class="text-pink-300">recipes</code> (junction table many-to-many) yang memetakan kebutuhan bahan baku per unit produk.</p>
+        <div class="code-block">
+DB::beginTransaction();<br>
+1. INSERT sale record<br>
+2. FOREACH recipe WHERE product_id = sold_product:<br>
+&nbsp;&nbsp; deduction = qty_sold × recipe.quantity_needed<br>
+&nbsp;&nbsp; IF raw_material.stock &lt; deduction → ROLLBACK<br>
+&nbsp;&nbsp; ELSE → UPDATE raw_materials SET stock -= deduction<br>
+3. CHECK: IF stock &lt;= minimum_threshold<br>
+&nbsp;&nbsp; → DISPATCH WhatsAppAlertJob (async)<br>
+DB::commit();
+        </div>
+        <p class="text-xs text-pink-200/40">Seluruh operasi dibungkus dalam <strong>DB::transaction()</strong> dengan <strong>Pessimistic Locking</strong> untuk menjamin ACID Compliance dan mencegah race condition.</p>
+      </div>
+
+      <div class="glass-strong p-5 space-y-3">
+        <h3 class="font-bold text-pink-300 text-sm"><i class="bi bi-whatsapp me-2"></i>WhatsApp Real-Time Alert</h3>
+        <p class="text-sm text-pink-200/60 leading-relaxed">Menggunakan <strong class="text-pink-200">Event-Driven Architecture</strong> — saat stok menyentuh batas kritis, sistem men-dispatch <code class="text-pink-300">LowStockDetected</code> event yang diproses secara <strong class="text-pink-200">asynchronous</strong> via Laravel Queue Worker, memastikan notifikasi tidak memblokir transaksi utama.</p>
+      </div>
+
+      <div class="glass-strong p-5 space-y-3">
+        <h3 class="font-bold text-pink-300 text-sm"><i class="bi bi-geo-alt me-2"></i>Google Maps API Integration</h3>
+        <p class="text-sm text-pink-200/60 leading-relaxed">Maps JavaScript API menampilkan marker interaktif lokasi toko dengan <strong class="text-pink-200">InfoWindow</strong> berisi alamat dan tombol navigasi. Implementasi lazy loading untuk optimasi FCP.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="img-slot"><span><i class="bi bi-image me-2"></i>Flowchart Diagram (Bizagi)</span></div>
+        <div class="img-slot"><span><i class="bi bi-diagram-2 me-2"></i>ERD Diagram (EA Sparx)</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. Cars City -->
+<div class="glass overflow-hidden">
+  <button class="accordion-btn w-full flex items-center justify-between p-6 text-left" onclick="toggleAcc(this)">
+    <div class="flex items-center gap-4">
+      <div class="w-12 h-12 rounded-2xl bg-pink-300/10 flex items-center justify-center text-2xl">🚗</div>
+      <div>
+        <h2 class="text-lg font-bold">Modul Reservasi — Cars City</h2>
+        <p class="text-xs text-pink-200/40 mt-1">Smart Scheduling · Anti Double-Booking · WhatsApp Confirmation</p>
+      </div>
+    </div>
+    <i class="bi bi-chevron-down accordion-icon text-pink-300"></i>
+  </button>
+  <div class="accordion-body">
+    <div class="px-6 pb-6 space-y-5">
+      <div class="flex flex-wrap gap-2">
+        <span class="tag">Laravel 10</span><span class="tag">MySQL</span><span class="tag">Temporal Validation</span><span class="tag">WhatsApp Gateway</span><span class="tag">Maps API</span>
+      </div>
+
+      <div class="glass-strong p-5 space-y-3">
+        <h3 class="font-bold text-pink-300 text-sm"><i class="bi bi-calendar-check me-2"></i>Smart Scheduling — Collision Prevention Algorithm</h3>
+        <p class="text-sm text-pink-200/60 leading-relaxed">Algoritma <strong class="text-pink-200">Temporal Slot Validation</strong> memastikan tidak ada dua reservasi yang menggunakan teknisi yang sama pada waktu yang overlap.</p>
+        <div class="code-block">
+1. Hitung end_time = requested_time + service.duration<br>
+2. Query overlap detection:<br>
+&nbsp;&nbsp; SELECT COUNT(*) FROM reservations<br>
+&nbsp;&nbsp; WHERE technician_id = ? AND date = ?<br>
+&nbsp;&nbsp; AND status NOT IN ('CANCELLED','COMPLETED')<br>
+&nbsp;&nbsp; AND (start_time &lt; calc_end AND end_time &gt; req_start)<br>
+3. IF count &gt; 0 → REJECT + suggest alternatives<br>
+&nbsp;&nbsp; ELSE → INSERT + DISPATCH confirmation
+        </div>
+        <p class="text-xs text-pink-200/40">Kondisi overlap: <code>new_start &lt; existing_end AND new_end &gt; existing_start</code> — menangkap semua kemungkinan tumpang tindih baik sebagian maupun seluruhnya.</p>
+      </div>
+
+      <div class="glass-strong p-5 space-y-3">
+        <h3 class="font-bold text-pink-300 text-sm"><i class="bi bi-whatsapp me-2"></i>WhatsApp Booking Confirmation</h3>
+        <p class="text-sm text-pink-200/60 leading-relaxed">Setelah reservasi valid, sistem men-dispatch <strong class="text-pink-200">Asynchronous Notification Job</strong> berisi nomor reservasi, jadwal, teknisi, dan detail kendaraan — dikirim via queue untuk menjaga response time &lt; 500ms.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="img-slot"><span><i class="bi bi-image me-2"></i>Flowchart Diagram (Bizagi)</span></div>
+        <div class="img-slot"><span><i class="bi bi-diagram-2 me-2"></i>ERD Diagram (EA Sparx)</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. WhatsApp API Gateway -->
+<div class="glass overflow-hidden">
+  <button class="accordion-btn w-full flex items-center justify-between p-6 text-left" onclick="toggleAcc(this)">
+    <div class="flex items-center gap-4">
+      <div class="w-12 h-12 rounded-2xl bg-pink-300/10 flex items-center justify-center text-2xl">💬</div>
+      <div>
+        <h2 class="text-lg font-bold">Modul Komunikasi — API Gateway</h2>
+        <p class="text-xs text-pink-200/40 mt-1">WhatsApp Integration · Async Queue · Real-Time Notification</p>
+      </div>
+    </div>
+    <i class="bi bi-chevron-down accordion-icon text-pink-300"></i>
+  </button>
+  <div class="accordion-body">
+    <div class="px-6 pb-6 space-y-5">
+      <div class="flex flex-wrap gap-2">
+        <span class="tag">WhatsApp API</span><span class="tag">Laravel Queue</span><span class="tag">Event-Driven</span><span class="tag">Non-Blocking I/O</span>
+      </div>
+
+      <div class="glass-strong p-5 space-y-4">
+        <h3 class="font-bold text-pink-300 text-sm"><i class="bi bi-send me-2"></i>Arsitektur Notifikasi Terpadu</h3>
+        <p class="text-sm text-pink-200/60 leading-relaxed">WhatsApp API diimplementasikan sebagai <strong class="text-pink-200">shared service</strong> yang digunakan lintas modul (Inventaris & Reservasi) melalui Laravel Queue.</p>
+
+        <div class="space-y-3">
+          <div class="flow-step">
+            <div class="flow-dot"></div>
+            <p class="text-sm font-semibold text-pink-200">1. Event Trigger</p>
+            <p class="text-xs text-pink-200/50">Sistem mendeteksi kondisi kritis (stok rendah / reservasi baru)</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-dot"></div>
+            <p class="text-sm font-semibold text-pink-200">2. Queue Dispatch</p>
+            <p class="text-xs text-pink-200/50">Job dikirim ke Redis/Database queue secara asynchronous</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-dot"></div>
+            <p class="text-sm font-semibold text-pink-200">3. Worker Process</p>
+            <p class="text-xs text-pink-200/50">Queue worker mengambil job dan mengirim HTTP request ke WhatsApp Gateway</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-dot"></div>
+            <p class="text-sm font-semibold text-pink-200">4. Delivery & Retry</p>
+            <p class="text-xs text-pink-200/50">Jika gagal, job di-retry hingga 3x dengan exponential backoff</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="img-slot"><span><i class="bi bi-image me-2"></i>Sequence Diagram</span></div>
+        <div class="img-slot"><span><i class="bi bi-diagram-2 me-2"></i>Architecture Diagram</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. AI & Computer Vision -->
+<div class="glass overflow-hidden">
+  <button class="accordion-btn w-full flex items-center justify-between p-6 text-left" onclick="toggleAcc(this)">
+    <div class="flex items-center gap-4">
+      <div class="w-12 h-12 rounded-2xl bg-pink-300/10 flex items-center justify-center text-2xl">🔍</div>
+      <div>
+        <h2 class="text-lg font-bold">Modul AI & Data Science</h2>
+        <p class="text-xs text-pink-200/40 mt-1">YOLOv8 · Vehicle Detection · PPE Compliance · Toll Tariff</p>
+      </div>
+    </div>
+    <i class="bi bi-chevron-down accordion-icon text-pink-300"></i>
+  </button>
+  <div class="accordion-body">
+    <div class="px-6 pb-6 space-y-5">
+      <div class="flex flex-wrap gap-2">
+        <span class="tag">Python</span><span class="tag">YOLOv8</span><span class="tag">OpenCV</span><span class="tag">Computer Vision</span><span class="tag">NumPy</span>
+      </div>
+
+      <div class="glass-strong p-5 space-y-3">
+        <h3 class="font-bold text-pink-300 text-sm"><i class="bi bi-eye me-2"></i>Detection Pipeline</h3>
+        <div class="code-block">
+INPUT (Image/Video/Webcam)<br>
+&nbsp;&nbsp;→ Preprocessing (Resize 640×640, Normalize, BGR→RGB)<br>
+&nbsp;&nbsp;→ YOLOv8 Inference (Single-Pass Detection)<br>
+&nbsp;&nbsp;→ Postprocessing (NMS Filter, Confidence ≥ 0.5)<br>
+&nbsp;&nbsp;→ OUTPUT: Annotated Image + JSON [{class, conf, bbox}]
+        </div>
+      </div>
+
+      <div class="glass-strong p-5 space-y-3">
+        <h3 class="font-bold text-pink-300 text-sm"><i class="bi bi-truck me-2"></i>Vehicle Detection → Toll Tariff Conversion</h3>
+        <p class="text-sm text-pink-200/60 leading-relaxed">Model YOLOv8 mengklasifikasikan kendaraan ke dalam 5 golongan tol. Output deteksi (class_id) di-mapping ke tabel tarif untuk menghasilkan perhitungan biaya tol otomatis secara <strong class="text-pink-200">real-time</strong>.</p>
+        <div class="code-block">
+class_id → CLASS_MAP["Golongan III"] → TARIFF[16500]<br><br>
+Output JSON:<br>
+{ "class": "Golongan III", "confidence": 0.92,<br>
+&nbsp;&nbsp;"tariff": 16500, "timestamp": "2026-05-04T10:30:15" }
+        </div>
+      </div>
+
+      <div class="glass-strong p-5 space-y-3">
+        <h3 class="font-bold text-pink-300 text-sm"><i class="bi bi-shield-check me-2"></i>PPE Compliance Detection</h3>
+        <p class="text-sm text-pink-200/60 leading-relaxed">Mendeteksi kepatuhan APD pekerja (Helm, Rompi). Jika terdeteksi violation (NO-Helmet/NO-Vest), sistem men-trigger <strong class="text-pink-200">safety alert</strong> dan menyimpan log pelanggaran untuk monitoring K3.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="img-slot"><span><i class="bi bi-image me-2"></i>Detection Pipeline Flowchart</span></div>
+        <div class="img-slot"><span><i class="bi bi-diagram-2 me-2"></i>Class Mapping Diagram</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. Sakura Korea Parts -->
+<div class="glass overflow-hidden">
+  <button class="accordion-btn w-full flex items-center justify-between p-6 text-left" onclick="toggleAcc(this)">
+    <div class="flex items-center gap-4">
+      <div class="w-12 h-12 rounded-2xl bg-pink-300/10 flex items-center justify-center text-2xl">🔧</div>
+      <div>
+        <h2 class="text-lg font-bold">Modul Basis Data — Sakura Korea Parts</h2>
+        <p class="text-xs text-pink-200/40 mt-1">Database Indexing · Query Optimization · Normalization 3NF</p>
+      </div>
+    </div>
+    <i class="bi bi-chevron-down accordion-icon text-pink-300"></i>
+  </button>
+  <div class="accordion-body">
+    <div class="px-6 pb-6 space-y-5">
+      <div class="flex flex-wrap gap-2">
+        <span class="tag">MySQL</span><span class="tag">Database Design</span><span class="tag">Indexing</span><span class="tag">ERD</span><span class="tag">SQL Optimization</span>
+      </div>
+
+      <div class="glass-strong p-5 space-y-3">
+        <h3 class="font-bold text-pink-300 text-sm"><i class="bi bi-database me-2"></i>Strategi Indexing untuk High-Volume Data</h3>
+        <p class="text-sm text-pink-200/60 leading-relaxed">Pada dataset ribuan SKU sparepart, <strong class="text-pink-200">Database Indexing</strong> diterapkan secara selektif untuk mengubah Full Table Scan menjadi Index Seek.</p>
+        <div class="code-block">
+TANPA INDEX: 15,000 rows examined → ~120ms<br>
+DENGAN INDEX: 1 row examined → ~0.5ms<br><br>
+-- Composite Index untuk multi-kondisi query<br>
+CREATE INDEX idx_sales_customer_date<br>
+&nbsp;&nbsp;ON sales_orders(customer_id, order_date);
+        </div>
+      </div>
+
+      <div class="glass-strong p-5 space-y-3">
+        <h3 class="font-bold text-pink-300 text-sm"><i class="bi bi-shield-lock me-2"></i>Referential Integrity</h3>
+        <p class="text-sm text-pink-200/60 leading-relaxed">Foreign Key Constraints dengan strategi <code class="text-pink-300">ON DELETE RESTRICT</code> mencegah penghapusan sparepart yang masih memiliki transaksi aktif, menjaga konsistensi data relasional.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="img-slot"><span><i class="bi bi-image me-2"></i>ERD Diagram (EA Sparx)</span></div>
+        <div class="img-slot"><span><i class="bi bi-diagram-2 me-2"></i>Query Execution Plan</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- Footer -->
+<footer class="border-t border-pink-300/10 py-8 text-center">
+  <p class="text-xs text-pink-200/30">© 2026 Feyza Revalina · Technical Architecture Documentation</p>
+</footer>
+
+<script>
+function toggleAcc(btn){
+  const body=btn.nextElementSibling;
+  const isOpen=body.classList.contains('open');
+  btn.classList.toggle('active',!isOpen);
+  body.classList.toggle('open',!isOpen);
+}
+</script>
+</body>
+</html>
